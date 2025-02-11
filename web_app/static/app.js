@@ -80,15 +80,27 @@ function refreshEntry() {
 }
 
 // Sidebar Toggle
+//document.getElementById("toggle-sidebar").addEventListener("click", function() {
+//    let sidebar = document.getElementById("sidebar");
+//    if (sidebar.style.width === "200px") {
+//        sidebar.style.width = "60px";
+//    } else {
+//        sidebar.style.width = "200px";
+//    }
+//});
 document.getElementById("toggle-sidebar").addEventListener("click", function() {
     let sidebar = document.getElementById("sidebar");
-    if (sidebar.style.width === "200px") {
-        sidebar.style.width = "60px";
+    let mainContent = document.getElementById("main-content");
+
+    sidebar.classList.toggle("collapsed");
+
+    // Adjust main content margin
+    if (sidebar.classList.contains("collapsed")) {
+        mainContent.style.marginLeft = "60px";
     } else {
-        sidebar.style.width = "200px";
+        mainContent.style.marginLeft = "200px";
     }
 });
-
 // Content Viewer Toggle
 function openContentViewer() {
     document.getElementById("content-viewer").classList.add("open");
