@@ -1,0 +1,31 @@
+Subject: [PATCH] Initial commit - 3
+Project Setup.
+---
+Index: .env
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.env b/.env
+--- a/.env	(revision b6b72258006a82ac5ab771055b741dcd23b39427)
++++ b/.env	(date 1739269229123)
+@@ -1,2 +1,0 @@
+-HF_TOKEN: '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'
+-
+Index: model_operations/llama_model.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/model_operations/llama_model.py b/model_operations/llama_model.py
+--- a/model_operations/llama_model.py	(revision b6b72258006a82ac5ab771055b741dcd23b39427)
++++ b/model_operations/llama_model.py	(date 1739269301446)
+@@ -2,7 +2,7 @@
+ 
+ 
+ class LlamaModelOperation():
+-    def __init__(self, model_name="decapoda-research/llama-3-70b-instruct-titan-0.1", hc_token='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'):
++    def __init__(self, model_name="decapoda-research/llama-3-70b-instruct-titan-0.1", hc_token='********'):
+         self.model_name = model_name
+         self.hc_token = hc_token
+         self.model = None 

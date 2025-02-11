@@ -2,7 +2,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
 class LlamaModelOperation():
-    def __init__(self, model_name="decapoda-research/llama-3-70b-instruct-titan-0.1", hc_token='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'):
+    def __init__(self, model_name="decapoda-research/llama-3-70b-instruct-titan-0.1", hc_token='********'):
         self.model_name = model_name
         self.hc_token = hc_token
         self.model = None 
