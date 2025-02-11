@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="elastic-search-container">
+    <h1>Elastic Search</h1>
+
+    <!-- Logout Button -->
+    <!--a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a-->
+
+    <!--h2>Uploaded Documents</h2>
+    <ul-- id="uploaded-documents"></ul--> <!-- List uploaded docs -->
+
+    <h2>File Upload</h2>
+    <form id="file-upload-form" method="POST" enctype="multipart/form-data" action="/upload-to-es">
+        <input type="file" name="file" class="form-control">
+        <button type="submit" class="btn btn-primary mt-2">Upload</button>
+        <div id="file-upload-message"></div>
+    </form>
+
+    <hr>
+
+    <h2>Search</h2>
+    <form id="elastic-search-form">
+        <input type="text" id="search-query" name="q" class="form-control" placeholder="Enter search query">
+        <select id="search-type" class="form-control mt-2">
+            <option value="match">Match</option>
+            <option value="match_all">Match All</option>
+            <option value="wildcard">Wildcard</option>
+        </select>
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form>
+    <div id="search-results"></div>
+</div>
+
+<script>
+    // Fetch uploaded documents
+    function fetchUploadedDocs() {
+        fetch('/uploaded-docs')
+            .then(response => response.json())
+            .then(data => {
+                const docList = document.getElementById('uploaded-documents');
+                docList.innerHTML = '';
+                data.forEach(doc => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = doc;
+                    docList.appendChild(listItem);
+                });
+            });
+    }
+    fetchUploadedDocs();
+
+    document.getElementById('file-upload-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        fetch('/upload-to-es', { method: 'POST', body: formData })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('file-upload-message').textContent = data.message;
+                fetchUploadedDocs();
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    document.getElementById('elastic-search-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const searchQuery = document.getElementById('search-query').value;
+        const searchType = document.getElementById('search-type').value;
+        const resultsDiv = document.getElementById('search-results');
+
+        resultsDiv.innerHTML = ''; // Clear previous results
+
+        fetch(`/search?q=${encodeURIComponent(searchQuery)}&type=${searchType}`)
+            .then(response => response.json())
+            .then(data => {
+                const seen = new Set(); // To prevent duplicate results
+                data.forEach(result => {
+                    if (!seen.has(result.file_name)) {
+                        seen.add(result.file_name);
+                        const resultDiv = document.createElement('div');
+                        resultDiv.innerHTML = `<h3>${result.file_name}</h3>`;
+                        resultsDiv.appendChild(resultDiv);
+                    }
+                });
+                if (seen.size === 0) resultsDiv.textContent = 'No results found.';
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+{% endblock %}

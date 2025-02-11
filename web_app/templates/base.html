@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DS FLASK APP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Left Sidebar -->
+    <div id="sidebar">
+        <button id="toggle-sidebar" class="toggle-btn">&#9776;</button>
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}" class="nav-link" id="nav-dashboard">Dashboard</a></li>
+            <li><a href="{{ url_for('file_operation') }}" class="nav-link" id="nav-file">File Operation</a></li>
+            <li><a href="{{ url_for('es_page') }}" class="nav-link" id="nav-search">Elastic Search</a></li>
+            <li><a href="#" onclick="openContentViewer()">Content Viewer</a></li>
+        </ul>
+    </div>
+
+    <!-- Content Viewer Panel -->
+    <div id="content-viewer">
+        <button onclick="closeContentViewer()" class="close-btn">X</button>
+        <h2>Content Viewer</h2>
+        <p>Selected document will be displayed here.</p>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url_for('dashboard') }}">DS FLASK APP</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle profile-circle" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                <span id="username-initial">U</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Account Settings</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="openSettings()">App Settings</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-4">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- App Settings Modal -->
+    <div id="settings-modal">
+        <h2>App Settings</h2>
+        <button onclick="toggleTheme()">Toggle Dark Mode</button>
+        <button onclick="closeSettings()">Close</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

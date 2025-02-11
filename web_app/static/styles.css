@@ -1,0 +1,188 @@
+/* styles.css */
+
+/* Root Variables */
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #f8f9fa;
+    --text-color: #343a40;
+    --profile-size: 40px;
+}
+
+/* General Styles */
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--primary-color);
+}
+
+/* Profile Dropdown */
+.profile-circle {
+    width: var(--profile-size);
+    height: var(--profile-size);
+    border-radius: 50%;
+    background-color: white;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.profile-circle:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    min-width: 180px;
+}
+
+/* Sidebar */
+#sidebar {
+    position: fixed;
+    width: 60px;
+    height: 100vh;
+    background: #333;
+    color: white;
+    transition: 0.3s;
+    overflow-x: hidden;
+    padding-top: 10px;
+}
+
+#sidebar:hover {
+    width: 200px;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 15px;
+    text-align: left;
+    font-size: 18px;
+}
+
+#sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    background: #575757;
+}
+
+/* Expandable Sidebar Toggle Button */
+.toggle-btn {
+    width: 100%;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+/* Main Content */
+#main-content {
+    margin-left: 60px;
+    transition: margin-left 0.3s;
+}
+
+/* Tiles View */
+.tile-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.tile {
+    width: 200px;
+    height: 100px;
+    background: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.tile:hover {
+    background: #0056b3;
+}
+
+/* Uploaded Documents */
+.uploaded-docs {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+/* Dark Mode Support */
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.navbar.dark-mode {
+    background-color: black;
+}
+
+/* Sidebar */
+#sidebar {
+    position: fixed;
+    width: 60px;
+    height: 100vh;
+    background: #333;
+    color: white;
+    transition: 0.3s;
+    overflow-x: hidden;
+    padding-top: 10px;
+}
+
+#sidebar:hover {
+    width: 200px;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+#sidebar ul li a.active {
+    font-weight: bold;
+}
+
+/* Content Viewer */
+#content-viewer {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding: 20px;
+}
+
+#content-viewer.open {
+    right: 0;
+}

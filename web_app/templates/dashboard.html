@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome to the Dashboard</h1>
+
+    <h2>Uploaded Documents</h2>
+    <div class="uploaded-docs">
+        <ul id="uploaded-documents"></ul>
+    </div>
+</div>
+
+<script>
+    function fetchUploadedDocs() {
+        fetch('/uploaded-docs')
+            .then(response => response.json())
+            .then(data => {
+                const docList = document.getElementById('uploaded-documents');
+                docList.innerHTML = '';
+                data.forEach(doc => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = doc;
+                    docList.appendChild(listItem);
+                });
+            });
+    }
+    fetchUploadedDocs();
+</script>
+{% endblock %}
